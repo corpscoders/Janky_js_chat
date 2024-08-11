@@ -1,11 +1,30 @@
-<script>
-    var fs = require('fs');
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Read File Content</title>
+</head>
+<body>
 
-// Use fs.readFile() method to read the file
-fs.readFile('Demo.txt', 'utf8', function (err, data) {
-    // Display the file content
-    console.log(data);
+<h2>Select a file to read its content:</h2>
+<input type="file" id="fileInput">
+
+<p><strong>File Content:</strong></p>
+<pre id="fileContent"></pre>
+
+<script>
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('fileContent').textContent = e.target.result;
+        }
+        reader.readAsText(file);
+    }
 });
 
-console.log('readFile called');
+console.log('File input change event listener added');
 </script>
+
+</body>
+</html>
